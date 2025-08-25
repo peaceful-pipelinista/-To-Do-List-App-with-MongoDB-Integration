@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Task ✏️</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Softly moving forward, one step at a time 🌸</h1>
+  </header>
+
+  <main class="container">
+    <h2>Edit Task</h2>
+    <p style="margin-top:0.25rem; color:#666;">Take a moment, then save gently 🌱</p>
+
+    <form action="/edit/<%= todo._id %>" method="POST" class="task-form">
+      <input type="text" name="taskText" value="<%= todo.title %>" required />
+      <select name="priority">
+        <option value="High" <%= todo.priority === 'High' ? 'selected' : '' %>>High 🔥</option>
+        <option value="Medium" <%= todo.priority === 'Medium' ? 'selected' : '' %>>Medium 🌼</option>
+        <option value="Low" <%= todo.priority === 'Low' ? 'selected' : '' %>>Low 🍃</option>
+      </select>
+      <button type="submit">💾 Save</button>
+    </form>
+
+    <a href="/" class="back-link">⬅️ Back to List</a>
+  </main>
+
+  <footer>
+    <p>Slow is beautiful, steady is strong 🍂</p>
+  </footer>
+
+  <script>
+  const form = document.querySelector(".task-form");
+  form.addEventListener("submit", function(e) {
+    const input = form.querySelector("input[name='taskText']");
+    if (!input.value.trim()) {
+      e.preventDefault();
+      alert("Task cannot be empty!");
+    }
+  });
+
+  // Show update success message AFTER page loads
+  document.addEventListener("DOMContentLoaded", () => {
+    const msg = "<%= msg %>";
+    if (msg) {
+      setTimeout(() => {
+        alert(msg);
+      }, 100); // small delay so page is ready first
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
